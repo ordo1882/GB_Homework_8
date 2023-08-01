@@ -6,17 +6,17 @@
 // 18 20
 // 15 18
 
-Console.WriteLine("Enter the first number:");
+Console.WriteLine("Enter number of rows:");
 int rows = Convert.ToInt32(Console.ReadLine());
 
-Console.WriteLine("Enter the first number:");
+Console.WriteLine("Enter number of columns:");
 int columns = Convert.ToInt32(Console.ReadLine());
 
 void PromptIsValid() // Реализация функции проверки минимально допустипых данных.
 {
     if (rows < 2 || columns < 2)
     {
-        Console.WriteLine("Nubers are too small.");
+        Console.WriteLine("Numbers are too small.");
         Environment.Exit(0);
     }
 }
@@ -29,9 +29,9 @@ int[,] resultMatrix = new int[rows, rows]; // Массив для результ
 
 int[,] FillArray(int[,] matrix) // Реализация функции заполнения массива и суммирования элементов строк.
 {
-    for (int i = 0; i < matrix.GetLength(0); i++)
+    for (int i = 0; i < matrix.GetLength(0); ++i)
     {
-        for (int j = 0; j < matrix.GetLength(1); j++)
+        for (int j = 0; j < matrix.GetLength(1); ++j)
         {
             matrix[i, j] = new Random().Next(0, 10);
         }
@@ -41,9 +41,9 @@ int[,] FillArray(int[,] matrix) // Реализация функции запо�
 
 int[,] PrintArray(int[,] matrix)
 {
-    for (int i = 0; i < matrix.GetLength(0); i++)
+    for (int i = 0; i < matrix.GetLength(0); ++i)
     {
-        for (int j = 0; j < matrix.GetLength(1); j++)
+        for (int j = 0; j < matrix.GetLength(1); ++j)
         {
             Console.Write(matrix[i, j] + " ");
         }
@@ -54,11 +54,11 @@ int[,] PrintArray(int[,] matrix)
 
 void MultiplytMatrix() // Реализация функции произведения матриц.
 {
-    for (int i = 0; i < matrix1.GetLength(0); i++)
+    for (int i = 0; i < matrix1.GetLength(0); ++i)
     {
-        for (int j = 0; j < matrix2.GetLength(1); j++)
+        for (int j = 0; j < matrix2.GetLength(1); ++j)
         {
-            for (int k = 0; k < matrix2.GetLength(0); k++)
+            for (int k = 0; k < matrix2.GetLength(0); ++k)
             {
                 resultMatrix[i, j] += matrix1[i, k] * matrix2[k, j];
             }

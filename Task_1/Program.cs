@@ -9,17 +9,17 @@
 // 9 5 3 2
 // 8 4 4 2
 
-Console.WriteLine("Enter the first number:");
+Console.WriteLine("Enter number of rows:");
 int rows = Convert.ToInt32(Console.ReadLine());
 
-Console.WriteLine("Enter the first number:");
+Console.WriteLine("Enter number of columns:");
 int columns = Convert.ToInt32(Console.ReadLine());
 
 void PromptIsValid() // Реализация функции проверки минимально допустипых данных.
 {
     if (rows < 2 || columns < 2)
     {
-        Console.WriteLine("Nubers are too small.");
+        Console.WriteLine("Numbers are too small.");
         Environment.Exit(0);
     }
 }
@@ -30,9 +30,9 @@ int[,] matrix = new int[rows, columns];
 
 void FillArray()
 {
-    for (int i = 0; i < matrix.GetLength(0); i++)
+    for (int i = 0; i < matrix.GetLength(0); ++i)
     {
-        for (int j = 0; j < matrix.GetLength(1); j++)
+        for (int j = 0; j < matrix.GetLength(1); ++j)
         {
             matrix[i, j] = new Random().Next(0, 10);
         }
@@ -43,11 +43,11 @@ void SortArray() // Реализация функции сортировки э�
 {
     int minValue = 0;
 
-    for (int i = 0; i < matrix.GetLength(0); i++)
+    for (int i = 0; i < matrix.GetLength(0); ++i)
     {
-        for (int j = 0; j < matrix.GetLength(1) - 1; j++)
+        for (int j = 0; j < matrix.GetLength(1) - 1; ++j)
         {
-            for (int k = j + 1; k < matrix.GetLength(1); k++)
+            for (int k = j + 1; k < matrix.GetLength(1); ++k)
             {
                 if (matrix[i, j] < matrix[i, k])
                 {
@@ -62,9 +62,9 @@ void SortArray() // Реализация функции сортировки э�
 
 void PrintArray()
 {
-    for (int i = 0; i < matrix.GetLength(0); i++)
+    for (int i = 0; i < matrix.GetLength(0); ++i)
     {
-        for (int j = 0; j < matrix.GetLength(1); j++)
+        for (int j = 0; j < matrix.GetLength(1); ++j)
         {
             Console.Write(matrix[i, j] + " ");
         }

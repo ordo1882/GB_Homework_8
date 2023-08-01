@@ -6,133 +6,75 @@
 // 27(0,0,1) 90(0,1,1)
 // 26(1,0,1) 55(1,1,1)
 
-// Console.WriteLine("Enter the first number:");
-// int rows = Convert.ToInt32(Console.ReadLine());
+Console.WriteLine("Enter number of elements for the 1st level:");
+int firstLevel = Convert.ToInt32(Console.ReadLine());
 
-// Console.WriteLine("Enter the first number:");
-// int columns = Convert.ToInt32(Console.ReadLine());
+Console.WriteLine("Enter number of elements for 2nd level:");
+int secondLevel = Convert.ToInt32(Console.ReadLine());
 
-// int[,] matrix = new int[rows, columns];
+Console.WriteLine("Enter number of elements for 3rd level:");
+int thirdLevel = Convert.ToInt32(Console.ReadLine());
 
-// void FillMatrix()
-// {
-//     for (int i = 0; i < matrix.GetLength(0); i++)
-//     {
-//         for (int j = 0; j < matrix.GetLength(1); j++)
-//         {
-//             matrix[i, j] = new Random().Next(0, 10);
-//             Console.Write(matrix[i, j] + " ");
-//         }
-//         Console.WriteLine();
-//     }
-// }
+void PromptIsValid() // Реализация функции проверки минимально допустипых данных и размера массива.
+{
+    if (firstLevel < 2 || secondLevel < 2 || thirdLevel < 2)
+    {
+        Console.WriteLine("Numbers are too small.");
+        Environment.Exit(0);
+    }
+    else if ((firstLevel * secondLevel * thirdLevel) > 90)
+    {
+        Console.WriteLine("Array is too big");
+        Environment.Exit(0);
+    }
+}
 
-// FillMatrix();
+PromptIsValid(); // Вызов функции проверки минимально допустипых данных и размера массива.
 
-// void SwapRowsFirstLast ()
-// {
-//     int tempRow = 0;
+int[,,] matrix = new int[firstLevel, secondLevel, thirdLevel]; // Создаем трехмерный массив.
+int[] numbers = Enumerable.Range(0, 100).ToArray(); // Создаем массив упорядоченых уникальных чисел до 99 включительно.
 
-//     for (int i = 0; i < matrix.GetLength(1); i++)
-//     {
-//         tempRow = matrix[0, i];
-//         matrix[0, i] = matrix[rows - 1, i];
-//         matrix[rows - 1, i] = tempRow;
-//     }
-//     Console.WriteLine();
-// }
+void ShuffleArray() // Реализация функции перемешивания массива.
+{
+    for (int i = 0; i < numbers.Length; ++i)
+    {
+        int randomIndex = new Random().Next(numbers.Length);
+        int temp = numbers[randomIndex];
+        numbers[randomIndex] = numbers[i];
+        numbers[i] = temp;
+    }
+}
 
-// SwapRowsFirstLast();
+ShuffleArray(); // Вызов функции перемешивания массива.
 
-// void PrintMatrix()
-// {
-//     for (int i = 0; i < matrix.GetLength(0); i++)
-//     {
-//         for (int j = 0; j < matrix.GetLength(1); j++)
-//         {
-//             Console.Write(matrix[i, j] + " ");
-//         }
-//         Console.WriteLine();
-//     }
-// }
+void FillMatrix() // Реализация функции заполнения трехмерного массива уже рандомными числами из массива numbers.
+{
+    int count = 0;
 
-// PrintMatrix();
+    for (int i = 0; i < matrix.GetLength(0); ++i)
+    {
+        for (int j = 0; j < matrix.GetLength(1); ++j)
+        {
+            for (int k = 0; k < matrix.GetLength(2); ++k)
+            {
+            Repeat:
+                if (numbers[count] > 9)
+                {
+                    matrix[i, j, k] = numbers[count];
+                    Console.Write($"{matrix[i, j, k]}({i},{j},{k}) ");
+                    ++count;
+                }
+                else // Если число не двузначное, то пропускаем ячейку, инкрементируем count и проверяем условие заново.
+                {
+                    ++count;
+                    goto Repeat;
+                }
+            }
+            Console.WriteLine();
+        }
+        Console.WriteLine();
+    }
+}
 
-//=================================================================
-
-// Console.WriteLine("Enter the first number:");
-// int rows = Convert.ToInt32(Console.ReadLine());
-
-// Console.WriteLine("Enter the first number:");
-// int columns = Convert.ToInt32(Console.ReadLine());
-
-// bool PromptIsValid(int a, int b)
-// {
-//     if (a == b)
-//     {
-//         return true;
-//     }
-//     else 
-//     {
-//         Console.WriteLine("Nubers have to be equal.");
-//         return false;
-//     }
-// }
-
-// int[,] FillMatrix(int[,] matrix)
-// {
-//     for (int i = 0; i < matrix.GetLength(0); i++)
-//     {
-//         for (int j = 0; j < matrix.GetLength(1); j++)
-//         {
-//             matrix[i, j] = new Random().Next(0, 10);
-//             Console.Write(matrix[i, j] + " ");
-//         }
-//         Console.WriteLine();
-//     }
-//     return matrix;
-// }
-
-// int[,] TurnMatrix(int[,] matrix)
-// {
-//     int tempRow = 0;
-
-//     for (int i = 0; i < matrix.GetLength(0); i++)
-//     {
-//         for (int j = i + 1; j < matrix.GetLength(1); j++)
-//         {
-//             if(matrix[i, j] != matrix[j, i])
-//             {
-//                 tempRow = matrix[i, j];
-//                 matrix[i, j] = matrix[j, i];
-//                 matrix[j, i] = tempRow;
-//             }
-//         }
-//     }
-//     Console.WriteLine();
-//     return matrix;
-// }
-
-// int[,] PrintMatrix(int[,] matrix)
-// {
-//     for (int i = 0; i < matrix.GetLength(0); i++)
-//     {
-//         for (int j = 0; j < matrix.GetLength(1); j++)
-//         {
-//             Console.Write(matrix[i, j] + " ");
-//         }
-//         Console.WriteLine();
-//     }
-//     return matrix;
-// }
-
-// if(PromptIsValid(rows, columns))
-// {
-//     int[,] newMatrix = new int[rows, columns];
-
-//     FillMatrix(newMatrix);
-//     TurnMatrix(newMatrix);
-//     PrintMatrix(newMatrix);
-// }
-
-//==============================================================
+Console.WriteLine();
+FillMatrix(); // Вызов функции заполнения трехмерного массива уже рандомными числами из массива numbers.

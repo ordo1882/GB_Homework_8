@@ -8,17 +8,17 @@
 // 5 2 6 7
 // Программа считает сумму элементов в каждой строке и выдаёт номер строки с наименьшей суммой элементов: 1 строка
 
-Console.WriteLine("Enter the first number:");
+Console.WriteLine("Enter number of rows:");
 int rows = Convert.ToInt32(Console.ReadLine());
 
-Console.WriteLine("Enter the first number:");
+Console.WriteLine("Enter number of columns:");
 int columns = Convert.ToInt32(Console.ReadLine());
 
 void PromptIsValid() // Реализация функции проверки минимально допустипых данных.
 {
     if (rows < 2 || columns < 2)
     {
-        Console.WriteLine("Nubers are too small.");
+        Console.WriteLine("Numbers are too small.");
         Environment.Exit(0);
     }
 }
@@ -30,9 +30,9 @@ int[] eachRowSum = new int[matrix.GetLength(0)]; // Массив для сумм
 
 void FillArray() // Реализация функции заполнения массива и суммирования элементов строк.
 {
-    for (int i = 0; i < matrix.GetLength(0); i++)
+    for (int i = 0; i < matrix.GetLength(0); ++i)
     {
-        for (int j = 0; j < matrix.GetLength(1); j++)
+        for (int j = 0; j < matrix.GetLength(1); ++j)
         {
             matrix[i, j] = new Random().Next(0, 10);
             Console.Write(matrix[i, j] + " ");
@@ -55,7 +55,7 @@ void FindMinRow() // Реализация функции нахождения с
     int minValue = eachRowSum[0];
     int minRow = 0;
 
-    for (int i = 1; i < eachRowSum.Length; i++)
+    for (int i = 1; i < eachRowSum.Length; ++i)
     {
         if (minValue > eachRowSum[i])
         {
